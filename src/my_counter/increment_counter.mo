@@ -24,7 +24,7 @@ actor Counter {
   public type HttpRequest = {
     url : Text;
     method : Text;
-    body : [Nat8];
+    body : Blob;
     headers : [HeaderField];
   };
 
@@ -58,7 +58,7 @@ actor Counter {
 
   public shared query func http_request(request: HttpRequest) : async HttpResponse {
       let value: Text = Nat.toText(currentValue);
-      let resp = "<h1>currentValue = " # value # "</h1>";
+      let resp = "<html><body><h1>currentValue is " # value # "</h1></body></html>";
 
       {
           body = Text.encodeUtf8(resp);
